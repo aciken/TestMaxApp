@@ -1,129 +1,87 @@
 import { View, Text, TouchableOpacity, SafeAreaView, Animated } from 'react-native';
-import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useRef } from 'react';
-import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-
-const ChartIcon = () => (
-  <View className="w-4 h-4 flex-row items-center justify-center">
-    <View className="w-1 h-4 bg-white/90 rounded-sm" />
-    <View className="w-1 h-2 bg-white/90 rounded-sm mx-0.5" />
-    <View className="w-1 h-3 bg-white/90 rounded-sm" />
-  </View>
-);
-
-const AnalyticsIcon = () => (
-  <View className="w-4 h-4">
-    <View className="absolute w-4 h-4 border-2 border-white/90 rounded-sm" />
-    <View className="absolute bottom-1 right-1 w-2 h-2 bg-white/90 rounded-sm" />
-  </View>
-);
-
-const PersonalizedIcon = () => (
-  <View className="w-4 h-4 items-center justify-center">
-    <View className="absolute w-3 h-3 border-2 border-white/90 rotate-45" />
-    <View className="absolute w-1.5 h-1.5 bg-white/90 rounded-full" />
-  </View>
-);
+import { Ionicons } from '@expo/vector-icons';
 
 export default function WelcomePage() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const slideAnim = useRef(new Animated.Value(50)).current;
 
   useEffect(() => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 1000,
-        useNativeDriver: true,
-      }),
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        duration: 800,
-        useNativeDriver: true,
-      }),
-    ]).start();
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
   }, []);
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <StatusBar style="dark" />
-      <LinearGradient
-        colors={['rgba(219, 234, 254, 0.3)', 'rgba(255, 255, 255, 0)']}
-        className="absolute w-full h-96"
-      />
+    <View className="flex-1 bg-gray-950">
+      <StatusBar style="light" />
       
-      <Animated.View 
-        className="flex-1 px-6 justify-between"
-        style={{ opacity: fadeAnim, transform: [{ translateY: slideAnim }] }}
-      >
-        {/* Top Section */}
-        <View className="items-center mt-16">
-          <LinearGradient
-            colors={['#3B82F6', '#2563EB']}
-            className="w-20 h-20 mb-6 rounded-2xl items-center justify-center shadow-lg"
-            style={{ elevation: 5 }}
-          >
-            <Text className="text-white text-3xl font-bold">TM</Text>
-          </LinearGradient>
-          <Text className="text-4xl font-bold text-gray-900 mb-3">
-            TestMax
-          </Text>
-          <Text className="text-base text-gray-600 text-center max-w-[280px] leading-5">
-            Professional testosterone monitoring and optimization platform
-          </Text>
-        </View>
-
-        {/* Middle Section - Features */}
-        <View className="py-10">
-          <View className="space-y-8">
-            <FeatureItem 
-              gradient={['#60A5FA', '#3B82F6']}
-              title="Track & Monitor"
-              description="Comprehensive tracking of key health markers"
-              icon={<ChartIcon />}
-            />
-            <FeatureItem 
-              gradient={['#818CF8', '#6366F1']}
-              title="Professional Analysis"
-              description="Expert-driven insights and recommendations"
-              icon={<AnalyticsIcon />}
-            />
-            <FeatureItem 
-              gradient={['#93C5FD', '#60A5FA']}
-              title="Personalized Plans"
-              description="Customized optimization strategies"
-              icon={<PersonalizedIcon />}
-            />
+      {/* Content */}
+      <SafeAreaView className="flex-1">
+        <Animated.View 
+          className="flex-1 px-8 justify-between py-20"
+          style={{ opacity: fadeAnim }}
+        >
+          {/* Logo Section */}
+          <View className="items-center">
+            <View className="w-24 h-24 bg-blue-500/20 rounded-3xl items-center justify-center mb-6 border border-blue-500/30">
+              <Text className="text-blue-400 text-4xl font-bold">T+</Text>
+            </View>
           </View>
-        </View>
 
-        {/* Bottom Section - Buttons */}
-        <View className="space-y-4 mb-10">
-            <TouchableOpacity className="shadow-lg">
-              <LinearGradient
-                colors={['#3B82F6', '#2563EB']}
-                className="w-full py-4 rounded-xl"
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-              >
-                <Text className="text-white text-center text-base font-medium">
-                  Create Account
-                </Text>
-              </LinearGradient>
-            </TouchableOpacity>
-      
+          {/* Title Section */}
+          <View className="items-center">
+            <Text className="text-white text-5xl font-bold mb-3">
+              optimize
+            </Text>
+            <Text className="text-white/80 text-5xl font-bold mb-3">
+              naturally
+            </Text>
+            <Text className="text-blue-400 text-lg">
+              your testosterone levels
+            </Text>
+          </View>
 
-            <TouchableOpacity onPress={() => router.push('/Home')} className="w-full border border-gray-200 py-4 rounded-xl bg-white shadow-sm active:bg-gray-50">
-              <Text className="text-gray-700 text-center text-base">
-                Sign In
+          {/* Sign In Buttons */}
+          <View className="space-y-4 w-full">
+            <TouchableOpacity 
+              className="w-full bg-blue-500 py-4 rounded-full flex-row items-center justify-center space-x-3 shadow-lg active:bg-blue-600"
+              onPress={() => {/* Handle Apple sign in */}}
+            >
+              <Ionicons name="logo-apple" size={22} color="white" />
+              <Text className="text-white text-base font-semibold">
+                Sign in with Apple
               </Text>
             </TouchableOpacity>
 
-        </View>
-      </Animated.View>
-    </SafeAreaView>
+            <TouchableOpacity 
+              className="w-full border border-gray-800 bg-gray-900 py-4 rounded-full flex-row items-center justify-center space-x-3 active:bg-gray-800"
+              onPress={() => router.push('/Home')}
+            >
+              <Ionicons name="logo-google" size={20} color="white" />
+              <Text className="text-white text-base font-semibold">
+                Sign in with Google
+              </Text>
+            </TouchableOpacity>
+
+            {/* Terms Text */}
+            <View className="mt-6">
+              <Text className="text-gray-400 text-center text-sm">
+                By signing up, you agree to our
+              </Text>
+              <View className="flex-row justify-center space-x-1">
+                <Text className="text-blue-400 text-sm">Terms of Use</Text>
+                <Text className="text-gray-400 text-sm">and</Text>
+                <Text className="text-blue-400 text-sm">Privacy Policy</Text>
+              </View>
+            </View>
+          </View>
+        </Animated.View>
+      </SafeAreaView>
+    </View>
   );
 }
 

@@ -1,93 +1,140 @@
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Plan() {
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <ScrollView className="flex-1">
-        {/* Header */}
-        <View className="px-6 pt-6 pb-4">
-          <Text className="text-2xl font-bold text-gray-900">My Plan</Text>
-          <Text className="text-base text-gray-600 mt-1">Your optimization journey</Text>
-        </View>
-
-        {/* Progress Overview */}
-        <View className="px-6 mb-6">
-          <LinearGradient
-            colors={['#818CF8', '#6366F1']}
-            className="p-6 rounded-2xl"
-          >
-            <Text className="text-white text-lg font-medium mb-2">Current Goal</Text>
-            <Text className="text-white/90 text-base mb-4">Optimize natural production</Text>
-            <View className="w-full h-2 bg-white/20 rounded-full">
-              <View className="w-[65%] h-full bg-white rounded-full" />
+    <View className="flex-1 bg-slate-950">
+      <SafeAreaView className="flex-1">
+        <ScrollView className="flex-1 px-5" showsVerticalScrollIndicator={false}>
+          {/* Header */}
+          <View className="flex-row justify-between items-center py-6">
+            <View>
+              <Text className="text-slate-300 text-sm font-medium">Optimization Plan</Text>
+              <Text className="text-white text-2xl font-bold mt-1">Current Program</Text>
             </View>
-            <Text className="text-white/80 text-sm mt-2">65% completed</Text>
+            <TouchableOpacity className="p-2 bg-white/5 rounded-xl">
+              <Ionicons name="calendar" size={24} color="#94a3b8" />
+            </TouchableOpacity>
+          </View>
+
+          {/* Progress */}
+          <LinearGradient
+            colors={['#1e293b', '#0f172a']}
+            className="rounded-3xl p-6 mb-6 border border-slate-800/50"
+          >
+            <View className="flex-row justify-between items-center mb-4">
+              <Text className="text-slate-300 text-sm font-medium">Program Progress</Text>
+              <Text className="text-sky-400 text-sm">65%</Text>
+            </View>
+            <View className="w-full h-2 bg-slate-800/50 rounded-full overflow-hidden">
+              <View className="w-[65%] h-full bg-gradient-to-r from-sky-500 to-indigo-500" />
+            </View>
+            <Text className="text-slate-400 text-xs mt-3">Week 3 of 4</Text>
           </LinearGradient>
-        </View>
 
-        {/* Daily Tasks */}
-        <View className="px-6 mb-6">
-          <Text className="text-lg font-medium text-gray-900 mb-4">Today's Tasks</Text>
-          <View className="space-y-4">
-            <TaskItem 
+          {/* Daily Tasks */}
+          <Text className="text-slate-300 text-sm font-medium mb-4">Today's Tasks</Text>
+          <View className="gap-3 mb-8">
+            <TaskItem
               title="Morning Workout"
-              description="Strength training - Focus on compound exercises"
+              time="7:00 AM"
               completed={true}
+              type="exercise"
             />
-            <TaskItem 
-              title="Nutrition"
-              description="Hit your protein target of 180g"
+            <TaskItem
+              title="Nutrition Check"
+              time="1:00 PM"
               completed={false}
+              type="nutrition"
             />
-            <TaskItem 
-              title="Sleep Schedule"
-              description="Aim for 8 hours of quality sleep"
+            <TaskItem
+              title="Sleep Routine"
+              time="10:00 PM"
               completed={false}
+              type="sleep"
             />
           </View>
-        </View>
 
-        {/* Recommendations */}
-        <View className="px-6">
-          <Text className="text-lg font-medium text-gray-900 mb-4">Recommendations</Text>
-          <View className="space-y-4">
-            <RecommendationCard 
-              title="Optimize Sleep"
-              description="Consider taking ZMA supplement before bed"
-              type="supplement"
+          {/* Recommendations */}
+          <Text className="text-slate-300 text-sm font-medium mb-4">Recommendations</Text>
+          <View className="gap-3 mb-8">
+            <RecommendationCard
+              icon="nutrition"
+              title="Increase Zinc Intake"
+              category="Nutrition"
+              color="#f59e0b"
             />
-            <RecommendationCard 
-              title="Stress Management"
-              description="Add 10-minute meditation to morning routine"
-              type="lifestyle"
+            <RecommendationCard
+              icon="walk"
+              title="Evening Walk"
+              category="Exercise"
+              color="#10b981"
+            />
+            <RecommendationCard
+              icon="moon"
+              title="Sleep Supplements"
+              category="Recovery"
+              color="#8b5cf6"
             />
           </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
+    </View>
   );
 }
 
-const TaskItem = ({ title, description, completed }) => (
-  <View className="flex-row items-start p-4 bg-gray-50 rounded-xl border border-gray-200">
-    <View className={`w-5 h-5 rounded-full border-2 mr-3 mt-1 ${completed ? 'bg-blue-500 border-blue-500' : 'border-gray-300'}`} />
-    <View className="flex-1">
-      <Text className="text-gray-900 font-medium">{title}</Text>
-      <Text className="text-gray-600 text-sm">{description}</Text>
-    </View>
-  </View>
-);
+const TaskItem = ({ title, time, completed, type }) => {
+  const typeColors = {
+    exercise: '#3b82f6',
+    nutrition: '#10b981',
+    sleep: '#8b5cf6'
+  };
 
-const RecommendationCard = ({ title, description, type }) => (
-  <View className="p-4 bg-gray-50 rounded-xl border border-gray-200">
-    <View className="flex-row justify-between items-start mb-2">
-      <Text className="text-gray-900 font-medium">{title}</Text>
-      <View className="px-2 py-1 bg-blue-100 rounded">
-        <Text className="text-blue-800 text-xs">{type}</Text>
+  return (
+    <View className="bg-slate-900 p-4 rounded-2xl border border-slate-800/50">
+      <View className="flex-row justify-between items-center">
+        <View className="flex-row items-center">
+          <View 
+            className="w-10 h-10 rounded-xl items-center justify-center"
+            style={{ backgroundColor: typeColors[type] + '20' }}
+          >
+            <Ionicons 
+              name={completed ? 'checkmark-circle' : 'ellipse-outline'} 
+              size={20} 
+              color={completed ? typeColors[type] : '#475569'} 
+            />
+          </View>
+          <View className="ml-3">
+            <Text className="text-white font-medium">{title}</Text>
+            <Text className="text-slate-400 text-xs mt-1">{time}</Text>
+          </View>
+        </View>
+        <Ionicons name="chevron-forward" size={18} color="#475569" />
       </View>
     </View>
-    <Text className="text-gray-600 text-sm">{description}</Text>
+  );
+};
+
+const RecommendationCard = ({ icon, title, category, color }) => (
+  <View className="bg-slate-900 p-4 rounded-2xl border border-slate-800/50">
+    <View className="flex-row justify-between items-center">
+      <View className="flex-row items-center">
+        <View 
+          className="w-10 h-10 rounded-xl items-center justify-center"
+          style={{ backgroundColor: color + '20' }}
+        >
+          <Ionicons name={icon} size={20} color={color} />
+        </View>
+        <View className="ml-3">
+          <Text className="text-white font-medium">{title}</Text>
+          <Text className="text-slate-400 text-xs mt-1">{category}</Text>
+        </View>
+      </View>
+      <TouchableOpacity className="bg-slate-800/50 p-2 rounded-lg">
+        <Text className="text-slate-300 text-xs">View</Text>
+      </TouchableOpacity>
+    </View>
   </View>
 );

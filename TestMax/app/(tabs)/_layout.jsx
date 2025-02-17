@@ -1,5 +1,7 @@
 import { Tabs } from 'expo-router';
-import { View } from 'react-native';
+import { View, Vibration } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 export default function TabLayout() {
   return (
@@ -7,24 +9,23 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: 'white',
+          backgroundColor: '#030712',
           borderTopWidth: 1,
-          borderTopColor: '#E5E7EB',
+          borderTopColor: '#1F2937',
           paddingTop: 5,
           height: 65,
         },
-        tabBarActiveTintColor: '#2563EB',
-        tabBarInactiveTintColor: '#6B7280',
+        tabBarActiveTintColor: '#60A5FA',
+        tabBarInactiveTintColor: '#9CA3AF',
+        tabBarShowLabel: false,
       }}
     >
       <Tabs.Screen
         name="Home"
         options={{
-          title: 'Dashboard',
-          tabBarIcon: ({ color }) => (
-            <View className={`w-6 h-6 items-center justify-center ${color === '#2563EB' ? 'opacity-100' : 'opacity-70'}`}>
-              <View className="w-4 h-4 border-2 rounded-lg" style={{ borderColor: color }} />
-              <View className="absolute w-2 h-2 bg-current rounded-sm" style={{ backgroundColor: color }} />
+          tabBarIcon: ({ color, size }) => (
+            <View className="items-center justify-center">
+              <Ionicons name="stats-chart" size={24} color={color} />
             </View>
           ),
         }}
@@ -32,11 +33,27 @@ export default function TabLayout() {
       <Tabs.Screen
         name="Plan"
         options={{
-          title: 'My Plan',
-          tabBarIcon: ({ color }) => (
-            <View className={`w-6 h-6 items-center justify-center ${color === '#2563EB' ? 'opacity-100' : 'opacity-70'}`}>
-              <View className="w-4 h-3 border-2 rounded-sm" style={{ borderColor: color }} />
-              <View className="absolute w-2 h-0.5 top-3" style={{ backgroundColor: color }} />
+          tabBarIcon: ({ color, size }) => (
+            <View className="items-center justify-center">
+              <Ionicons name="fitness" size={24} color={color} />
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Settings"
+        listeners={{
+          tabPress: (e) => {
+            e.preventDefault();
+            Vibration.vibrate(1); // Single millisecond vibration
+            router.push('/modal/settings_modal');
+          },
+        }}
+        options={{
+          presentation: 'modal',
+          tabBarIcon: ({ color, size }) => (
+            <View className="items-center justify-center">
+              <Ionicons name="settings" size={24} color={color} />
             </View>
           ),
         }}
