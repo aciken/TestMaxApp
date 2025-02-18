@@ -10,111 +10,95 @@ export default function SettingsModal() {
   const [biometrics, setBiometrics] = useState(false);
 
   return (
-    <View className="flex-1 bg-slate-950">
+    <View className="flex-1 bg-gradient-to-b from-[#f8fafc] to-[#f0f9ff]">
       <SafeAreaView className="flex-1">
         {/* Header */}
-        <View className="flex-row justify-between items-center px-6 py-4 border-b border-slate-800">
-          <Text className="text-white text-2xl font-bold">Settings</Text>
+        <View className="flex-row justify-between items-center px-6 py-4 border-b border-slate-100">
+          <Text className="text-slate-900 text-xl font-bold">Settings</Text>
           <TouchableOpacity 
             onPress={() => router.back()}
-            className="p-2"
+            className="p-2 bg-slate-100 rounded-lg"
           >
-            <Ionicons name="close" size={24} color="#94a3b8" />
+            <Ionicons name="close" size={20} color="#64748b" />
           </TouchableOpacity>
         </View>
 
         <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
           {/* Profile Section */}
-          <View className="px-6 py-8">
-            <View className="flex-row items-center">
-              <View className="w-16 h-16 bg-indigo-900/30 rounded-2xl items-center justify-center border border-indigo-800/50">
-                <Text className="text-indigo-400 text-xl font-bold">JD</Text>
+          <View className="px-5 py-6">
+            <View className="flex-row items-center bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-sm shadow-blue-50 border border-blue-50">
+              <View className="w-12 h-12 bg-blue-50 rounded-xl items-center justify-center">
+                <Text className="text-blue-600 text-xl font-bold">JD</Text>
               </View>
               <View className="ml-4 flex-1">
-                <Text className="text-white text-lg font-semibold">John Doe</Text>
-                <Text className="text-slate-400 text-sm mt-1">john.doe@example.com</Text>
+                <Text className="text-slate-800 font-semibold">John Doe</Text>
+                <Text className="text-slate-500 text-sm mt-1">Age: 28 • Weight: 180 lbs</Text>
               </View>
-              <TouchableOpacity className="p-2">
-                <Ionicons name="pencil" size={20} color="#94a3b8" />
+              <TouchableOpacity className="w-8 h-8 bg-blue-50 rounded-lg items-center justify-center">
+                <Ionicons name="pencil-outline" size={16} color="#3b82f6" />
               </TouchableOpacity>
             </View>
           </View>
 
           {/* Settings Groups */}
-          <View className="px-6 space-y-8">
-            {/* Preferences */}
-            <View className="space-y-6">
-              <Text className="text-slate-500 text-xs font-medium uppercase tracking-wider">Preferences</Text>
-              <View className="bg-slate-800 rounded-xl p-4 border border-slate-700/50">
+          <View className="px-6 space-y-6">
+            <View className="space-y-4">
+              <Text className="text-slate-400 text-xs font-medium uppercase">App Settings</Text>
+              <View className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm shadow-blue-50 border border-blue-50">
                 <SettingItem
                   icon="notifications-outline"
+                  iconColor="#3b82f6"
+                  bgColor="bg-blue-50"
                   title="Notifications"
-                  subtitle="Manage push notifications"
+                  subtitle="Reminders & updates"
                   isSwitch
                   value={notifications}
                   onValueChange={setNotifications}
                 />
-                <View className="h-px bg-slate-700/50 my-3" />
+                <View className="h-px bg-slate-100 my-3" />
                 <SettingItem
-                  icon="moon-outline"
-                  title="Dark Mode"
-                  subtitle="System settings"
+                  icon="fitness-outline"
+                  title="Workout Tracking"
+                  subtitle="Connect fitness apps"
                   isSwitch
-                  value={darkMode}
-                  onValueChange={setDarkMode}
+                  value={true}
                 />
-                <View className="h-px bg-slate-700/50 my-3" />
+                <View className="h-px bg-slate-100 my-3" />
                 <SettingItem
-                  icon="finger-print-outline"
-                  title="Biometric Login"
-                  subtitle="Use Face ID/Touch ID"
+                  icon="calendar-outline"
+                  title="Test Reminders"
+                  subtitle="Schedule blood work"
                   isSwitch
-                  value={biometrics}
-                  onValueChange={setBiometrics}
+                  value={true}
                 />
               </View>
             </View>
 
-            {/* Account */}
-            <View className="space-y-6">
-              <Text className="text-slate-500 text-xs font-medium uppercase tracking-wider">Account</Text>
-              <View className="bg-slate-800 rounded-xl p-4 border border-slate-700/50">
+            <View className="space-y-4">
+              <Text className="text-slate-400 text-xs font-medium uppercase">Data & Privacy</Text>
+              <View className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm shadow-blue-50 border border-blue-50">
                 <SettingItem
-                  icon="lock-closed-outline"
-                  title="Security"
-                  subtitle="Change password and 2FA"
-                  onPress={() => console.log("Security")}
+                  icon="analytics-outline"
+                  title="Export Health Data"
+                  subtitle="Download your progress"
+                  onPress={() => {}}
                 />
-                <View className="h-px bg-slate-700/50 my-3" />
+                <View className="h-px bg-slate-100 my-3" />
                 <SettingItem
-                  icon="mail-outline"
-                  title="Email Preferences"
-                  onPress={() => console.log("Email prefs")}
+                  icon="shield-checkmark-outline"
+                  title="Privacy Settings"
+                  subtitle="Manage your data"
+                  onPress={() => {}}
                 />
-                <View className="h-px bg-slate-700/50 my-3" />
+                <View className="h-px bg-slate-100 my-3" />
                 <SettingItem
-                  icon="card-outline"
-                  title="Billing"
-                  subtitle="Update payment methods"
-                  onPress={() => console.log("Billing")}
-                />
-              </View>
-            </View>
-
-            {/* Support */}
-            <View className="space-y-6">
-              <Text className="text-slate-500 text-xs font-medium uppercase tracking-wider">Support</Text>
-              <View className="bg-slate-800 rounded-xl p-4 border border-slate-700/50">
-                <SettingItem
-                  icon="help-circle-outline"
-                  title="Help Center"
-                  onPress={() => console.log("Help")}
-                />
-                <View className="h-px bg-slate-700/50 my-3" />
-                <SettingItem
-                  icon="document-text-outline"
-                  title="Terms & Privacy"
-                  onPress={() => console.log("Terms")}
+                  icon="log-out-outline"
+                  title="Logout"
+                  onPress={() => {
+                    router.back();
+                    router.replace('/');
+                  }}
+                  color="red"
                 />
               </View>
             </View>
@@ -122,7 +106,6 @@ export default function SettingsModal() {
             {/* App Version */}
             <View className="py-8 items-center">
               <Text className="text-slate-500 text-sm">Version 1.0.0</Text>
-              <Text className="text-slate-600 text-xs mt-2">© 2024 TestMax</Text>
             </View>
           </View>
         </ScrollView>
@@ -138,31 +121,53 @@ const SettingItem = ({
   isSwitch, 
   value, 
   onValueChange, 
-  onPress 
-}) => (
-  <TouchableOpacity 
-    className="flex-row items-center justify-between py-3"
-    onPress={onPress}
-    disabled={isSwitch}
-  >
-    <View className="flex-row items-center flex-1">
-      <View className="w-10 h-10 bg-indigo-900/30 rounded-lg items-center justify-center">
-        <Ionicons name={icon} size={20} color="#818cf8" />
+  onPress,
+  color = 'default',
+  iconColor = '#64748b',
+  bgColor = 'bg-slate-100'
+}) => {
+  const colors = {
+    red: {
+      icon: '#ef4444',
+      bg: 'bg-red-500/20',
+    },
+    default: {
+      icon: '#64748b',
+      bg: 'bg-slate-100',
+    }
+  };
+
+  return (
+    <TouchableOpacity 
+      className="flex-row items-center justify-between py-2"
+      onPress={onPress}
+      disabled={isSwitch}
+    >
+      <View className="flex-row items-center flex-1">
+        <View className={`w-10 h-10 ${bgColor} rounded-lg items-center justify-center`}>
+          <Ionicons name={icon} size={20} color={iconColor} />
+        </View>
+        <View className="ml-4 flex-1">
+          <Text className={`${color === 'red' ? 'text-red-400' : 'text-slate-900'} font-medium`}>
+            {title}
+          </Text>
+          {subtitle && <Text className="text-slate-500 text-sm mt-1">{subtitle}</Text>}
+        </View>
       </View>
-      <View className="ml-4 flex-1">
-        <Text className="text-white font-medium">{title}</Text>
-        {subtitle && <Text className="text-slate-400 text-sm mt-1">{subtitle}</Text>}
-      </View>
-    </View>
-    {isSwitch ? (
-      <Switch
-        value={value}
-        onValueChange={onValueChange}
-        trackColor={{ false: '#1e293b', true: '#3730a3' }}
-        thumbColor={value ? '#4f46e5' : '#64748b'}
-      />
-    ) : (
-      <Ionicons name="chevron-forward" size={20} color="#64748b" />
-    )}
-  </TouchableOpacity>
-);
+      {isSwitch ? (
+        <Switch
+          value={value}
+          onValueChange={onValueChange}
+          trackColor={{ false: '#1e293b', true: '#1e3a8a' }}
+          thumbColor={value ? '#60a5fa' : '#64748b'}
+        />
+      ) : (
+        <Ionicons 
+          name="chevron-forward" 
+          size={18} 
+          color={color === 'red' ? '#ef4444' : '#64748b'} 
+        />
+      )}
+    </TouchableOpacity>
+  );
+};

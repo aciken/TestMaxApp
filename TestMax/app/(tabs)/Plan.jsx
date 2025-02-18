@@ -5,37 +5,59 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Plan() {
   return (
-    <View className="flex-1 bg-slate-950">
-      <SafeAreaView className="flex-1">
-        <ScrollView className="flex-1 px-5" showsVerticalScrollIndicator={false}>
+    <View className="flex-1 bg-gradient-to-b from-[#f8fafc] to-[#f0f9ff]">
+      <SafeAreaView className="flex-1" edges={['top']}>
+        <ScrollView className="flex-1 px-5" showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }}>
           {/* Header */}
           <View className="flex-row justify-between items-center py-6">
             <View>
-              <Text className="text-slate-300 text-sm font-medium">Optimization Plan</Text>
-              <Text className="text-white text-2xl font-bold mt-1">Current Program</Text>
+              <Text className="text-slate-800 text-2xl font-bold">
+                Sunday, October 16
+              </Text>
             </View>
-            <TouchableOpacity className="p-2 bg-white/5 rounded-xl">
-              <Ionicons name="calendar" size={24} color="#94a3b8" />
-            </TouchableOpacity>
           </View>
 
-          {/* Progress */}
-          <LinearGradient
-            colors={['#1e293b', '#0f172a']}
-            className="rounded-3xl p-6 mb-6 border border-slate-800/50"
+          {/* Day Streak Section */}
+          <View className="flex-row mb-6 overflow-hidden">
+            <View className="bg-indigo-600 rounded-3xl px-5 py-4 flex-row items-center justify-between flex-1">
+              <View>
+                <Text className="text-white/80 text-sm">Day Streak</Text>
+                <Text className="text-white text-2xl font-bold mt-1">3</Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Days Progress */}
+          <ScrollView 
+            horizontal 
+            showsHorizontalScrollIndicator={false}
+            className="mb-8"
           >
-            <View className="flex-row justify-between items-center mb-4">
-              <Text className="text-slate-300 text-sm font-medium">Program Progress</Text>
-              <Text className="text-sky-400 text-sm">65%</Text>
+            <View className="flex-row space-x-3">
+              <View className="bg-white rounded-2xl px-4 py-3 items-center border border-blue-50 shadow-sm">
+                <View className="w-10 h-10 bg-orange-50 rounded-xl items-center justify-center mb-1">
+                  <Ionicons name="flame" size={20} color="#f97316" />
+                </View>
+                <Text className="text-slate-600 text-sm">Day 3</Text>
+              </View>
+              {/* Future days are less emphasized */}
+              <View className="bg-white/60 rounded-2xl px-4 py-3 items-center border border-blue-50">
+                <View className="w-10 h-10 bg-slate-50 rounded-xl items-center justify-center mb-1">
+                  <Text className="text-slate-400">4</Text>
+                </View>
+                <Text className="text-slate-400 text-sm">Day 4</Text>
+              </View>
+              {/* Add more future days... */}
             </View>
-            <View className="w-full h-2 bg-slate-800/50 rounded-full overflow-hidden">
-              <View className="w-[65%] h-full bg-gradient-to-r from-sky-500 to-indigo-500" />
-            </View>
-            <Text className="text-slate-400 text-xs mt-3">Week 3 of 4</Text>
-          </LinearGradient>
+          </ScrollView>
 
           {/* Daily Tasks */}
-          <Text className="text-slate-300 text-sm font-medium mb-4">Today's Tasks</Text>
+          <Text className="text-slate-400 text-sm mb-3">Daily Tasks</Text>
+          <View className="bg-white rounded-3xl p-4 border border-blue-50 shadow-sm mb-4">
+            <Text className="text-slate-800 font-medium mb-2">Great work!</Text>
+            <Text className="text-slate-600 text-sm">You completed today's tasks</Text>
+          </View>
+
           <View className="gap-3 mb-8">
             <TaskItem
               title="Morning Workout"
@@ -44,13 +66,13 @@ export default function Plan() {
               type="exercise"
             />
             <TaskItem
-              title="Nutrition Check"
+              title="Supplement Stack"
               time="1:00 PM"
               completed={false}
               type="nutrition"
             />
             <TaskItem
-              title="Sleep Routine"
+              title="Sleep Optimization"
               time="10:00 PM"
               completed={false}
               type="sleep"
@@ -58,25 +80,25 @@ export default function Plan() {
           </View>
 
           {/* Recommendations */}
-          <Text className="text-slate-300 text-sm font-medium mb-4">Recommendations</Text>
+          <Text className="text-slate-400 text-sm mb-4">Educational Content</Text>
           <View className="gap-3 mb-8">
             <RecommendationCard
               icon="nutrition"
-              title="Increase Zinc Intake"
+              title="Testosterone & Micronutrients"
               category="Nutrition"
-              color="#f59e0b"
+              time="5 min read"
             />
             <RecommendationCard
-              icon="walk"
-              title="Evening Walk"
+              icon="barbell"
+              title="Compound Lifts Impact"
               category="Exercise"
-              color="#10b981"
+              time="4 min read"
             />
             <RecommendationCard
               icon="moon"
-              title="Sleep Supplements"
+              title="Sleep & Hormone Production"
               category="Recovery"
-              color="#8b5cf6"
+              time="3 min read"
             />
           </View>
         </ScrollView>
@@ -93,11 +115,11 @@ const TaskItem = ({ title, time, completed, type }) => {
   };
 
   return (
-    <View className="bg-slate-900 p-4 rounded-2xl border border-slate-800/50">
-      <View className="flex-row justify-between items-center">
+    <View className="bg-white p-4 rounded-2xl flex-row items-center shadow-sm border border-blue-50">
+      <View className="flex-row justify-between items-center flex-1">
         <View className="flex-row items-center">
           <View 
-            className="w-10 h-10 rounded-xl items-center justify-center"
+            className="w-10 h-10 rounded-xl items-center justify-center mr-4"
             style={{ backgroundColor: typeColors[type] + '20' }}
           >
             <Ionicons 
@@ -106,35 +128,34 @@ const TaskItem = ({ title, time, completed, type }) => {
               color={completed ? typeColors[type] : '#475569'} 
             />
           </View>
-          <View className="ml-3">
-            <Text className="text-white font-medium">{title}</Text>
-            <Text className="text-slate-400 text-xs mt-1">{time}</Text>
+          <View>
+            <Text className="text-slate-900 font-medium">{title}</Text>
+            <Text className="text-slate-500 text-sm mt-1">{time}</Text>
           </View>
         </View>
-        <Ionicons name="chevron-forward" size={18} color="#475569" />
       </View>
     </View>
   );
 };
 
-const RecommendationCard = ({ icon, title, category, color }) => (
-  <View className="bg-slate-900 p-4 rounded-2xl border border-slate-800/50">
-    <View className="flex-row justify-between items-center">
+const RecommendationCard = ({ icon, title, category, time }) => (
+  <View className="bg-white p-4 rounded-2xl flex-row items-center shadow-sm border border-blue-50">
+    <View className="flex-row justify-between items-center flex-1">
       <View className="flex-row items-center">
         <View 
-          className="w-10 h-10 rounded-xl items-center justify-center"
-          style={{ backgroundColor: color + '20' }}
+          className="w-10 h-10 bg-blue-50 rounded-xl items-center justify-center mr-4"
         >
-          <Ionicons name={icon} size={20} color={color} />
+          <Ionicons name={icon} size={20} color="#3b82f6" />
         </View>
-        <View className="ml-3">
-          <Text className="text-white font-medium">{title}</Text>
-          <Text className="text-slate-400 text-xs mt-1">{category}</Text>
+        <View>
+          <Text className="text-slate-900 font-medium">{title}</Text>
+          <Text className="text-slate-500 text-sm mt-1">{time}</Text>
         </View>
       </View>
-      <TouchableOpacity className="bg-slate-800/50 p-2 rounded-lg">
-        <Text className="text-slate-300 text-xs">View</Text>
-      </TouchableOpacity>
+      <View className="w-6 h-6 bg-blue-50 rounded-full items-center justify-center">
+        <Ionicons name="checkmark" size={14} color="#3b82f6" />
+      </View>
     </View>
   </View>
 );
+

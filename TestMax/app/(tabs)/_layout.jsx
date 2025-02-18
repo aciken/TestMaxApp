@@ -9,22 +9,23 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#030712',
-          borderTopWidth: 1,
-          borderTopColor: '#1F2937',
-          paddingTop: 5,
           height: 65,
+          paddingTop: 6,
+          backgroundColor: 'white',
+          borderTopColor: '#e2e8f0',
+          borderTopWidth: 1,
+          elevation: 0,
         },
-        tabBarActiveTintColor: '#60A5FA',
-        tabBarInactiveTintColor: '#9CA3AF',
+        tabBarActiveTintColor: '#3b82f6',
+        tabBarInactiveTintColor: '#cbd5e1',
         tabBarShowLabel: false,
       }}
     >
       <Tabs.Screen
         name="Home"
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <View className="items-center justify-center">
+          tabBarIcon: ({ color }) => (
+            <View className="flex-1 items-center justify-center">
               <Ionicons name="stats-chart" size={24} color={color} />
             </View>
           ),
@@ -33,8 +34,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="Plan"
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <View className="items-center justify-center">
+          tabBarIcon: ({ color }) => (
+            <View className="flex-1 items-center justify-center">
               <Ionicons name="fitness" size={24} color={color} />
             </View>
           ),
@@ -45,14 +46,14 @@ export default function TabLayout() {
         listeners={{
           tabPress: (e) => {
             e.preventDefault();
-            Vibration.vibrate(1); // Single millisecond vibration
+            Vibration.vibrate(1);
             router.push('/modal/settings_modal');
           },
         }}
         options={{
           presentation: 'modal',
-          tabBarIcon: ({ color, size }) => (
-            <View className="items-center justify-center">
+          tabBarIcon: ({ color }) => (
+            <View className="flex-1 items-center justify-center">
               <Ionicons name="settings" size={24} color={color} />
             </View>
           ),

@@ -19,6 +19,16 @@ export default function Layout() {
                 animation: 'slide_from_bottom',
               }}
             />
+            <Stack.Screen 
+              name="modal/signin_modal"
+              options={{
+                presentation: 'modal',
+                animation: 'slide_from_bottom',
+              }}
+            />
+            <Stack.Screen 
+              name="(onboarding)"
+            />
         </Stack>
     )
 }

@@ -2,7 +2,6 @@ import { View, Text, TouchableOpacity, SafeAreaView, Animated } from 'react-nati
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useRef } from 'react';
 import { router } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
 
 export default function WelcomePage() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -16,68 +15,50 @@ export default function WelcomePage() {
   }, []);
 
   return (
-    <View className="flex-1 bg-gray-950">
-      <StatusBar style="light" />
+    <View className="flex-1 bg-gradient-to-b from-[#f8fafc] to-[#f0f9ff]">
+      <StatusBar style="dark" />
       
-      {/* Content */}
       <SafeAreaView className="flex-1">
         <Animated.View 
-          className="flex-1 px-8 justify-between py-20"
+          className="flex-1 px-8"
           style={{ opacity: fadeAnim }}
         >
           {/* Logo Section */}
-          <View className="items-center">
-            <View className="w-24 h-24 bg-blue-500/20 rounded-3xl items-center justify-center mb-6 border border-blue-500/30">
-              <Text className="text-blue-400 text-4xl font-bold">T+</Text>
+          <View className="items-center mt-20 mb-16">
+            <View className="w-20 h-20 bg-blue-50 rounded-2xl items-center justify-center border border-blue-100 shadow-sm shadow-blue-100">
+              <Text className="text-blue-500 text-4xl font-bold">T+</Text>
             </View>
           </View>
 
           {/* Title Section */}
-          <View className="items-center">
-            <Text className="text-white text-5xl font-bold mb-3">
-              optimize
+          <View className="items-center mb-6">
+            <Text className="text-slate-800 text-4xl font-bold text-center mb-3">
+              Welcome to TestMax
             </Text>
-            <Text className="text-white/80 text-5xl font-bold mb-3">
-              naturally
-            </Text>
-            <Text className="text-blue-400 text-lg">
-              your testosterone levels
+            <Text className="text-slate-600 text-xl text-center">
+              Starting today, let's focus better and accomplish your dreams.
             </Text>
           </View>
 
-          {/* Sign In Buttons */}
-          <View className="space-y-4 w-full">
+          {/* Action Buttons */}
+          <View className="mt-auto mb-10 space-y-6">
             <TouchableOpacity 
-              className="w-full bg-blue-500 py-4 rounded-full flex-row items-center justify-center space-x-3 shadow-lg active:bg-blue-600"
-              onPress={() => {/* Handle Apple sign in */}}
+              className="w-full bg-blue-500 py-4 rounded-full items-center shadow-sm shadow-blue-200 active:bg-blue-600"
+              onPress={() => router.push('/(onboarding)/onboarding_1')}
             >
-              <Ionicons name="logo-apple" size={22} color="white" />
-              <Text className="text-white text-base font-semibold">
-                Sign in with Apple
+              <Text className="text-white text-lg font-medium">
+                Get Started
               </Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
-              className="w-full border border-gray-800 bg-gray-900 py-4 rounded-full flex-row items-center justify-center space-x-3 active:bg-gray-800"
-              onPress={() => router.push('/Home')}
+              className="items-center"
+              onPress={() => router.push('/modal/signin_modal')}
             >
-              <Ionicons name="logo-google" size={20} color="white" />
-              <Text className="text-white text-base font-semibold">
-                Sign in with Google
+              <Text className="text-slate-600 text-lg">
+                Already have an account?
               </Text>
             </TouchableOpacity>
-
-            {/* Terms Text */}
-            <View className="mt-6">
-              <Text className="text-gray-400 text-center text-sm">
-                By signing up, you agree to our
-              </Text>
-              <View className="flex-row justify-center space-x-1">
-                <Text className="text-blue-400 text-sm">Terms of Use</Text>
-                <Text className="text-gray-400 text-sm">and</Text>
-                <Text className="text-blue-400 text-sm">Privacy Policy</Text>
-              </View>
-            </View>
           </View>
         </Animated.View>
       </SafeAreaView>
