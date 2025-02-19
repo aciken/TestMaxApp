@@ -28,16 +28,6 @@ export default function OnboardingOne() {
       <StatusBar style="dark" />
       
       <SafeAreaView className="flex-1">
-        {/* Skip Button */}
-        <View className="px-6 flex-row justify-end">
-          <TouchableOpacity 
-            onPress={() => router.push('/Home')}
-            className="py-2"
-          >
-            <Text className="text-slate-600 text-base">Skip</Text>
-          </TouchableOpacity>
-        </View>
-
         <View className="flex-1 px-8">
           {/* Icon Section */}
           <Animated.View 
@@ -62,17 +52,19 @@ export default function OnboardingOne() {
             </Text>
 
             {/* Feature List */}
-            <View className="space-y-4">
+            <View>
               <FeatureItem 
                 icon="analytics-outline"
                 title="Track Progress"
                 description="Monitor your levels and see improvements over time"
               />
+              <View className="mb-4" />
               <FeatureItem 
                 icon="nutrition-outline"
                 title="Personalized Plans"
                 description="Get customized recommendations based on your goals"
               />
+              <View className="mb-4" />
               <FeatureItem 
                 icon="trending-up-outline"
                 title="Natural Methods"
@@ -91,13 +83,6 @@ export default function OnboardingOne() {
               <Ionicons name="arrow-forward" size={20} color="white" />
             </TouchableOpacity>
           </View>
-        </View>
-
-        {/* Progress Dots */}
-        <View className="flex-row justify-center space-x-2 mb-6">
-          <View className="w-2 h-2 rounded-full bg-blue-500" />
-          <View className="w-2 h-2 rounded-full bg-slate-200" />
-          <View className="w-2 h-2 rounded-full bg-slate-200" />
         </View>
       </SafeAreaView>
     </View>
